@@ -14,6 +14,9 @@ var eWord = function (englishWord) {
             break;
           }
         }
+          if ((englishWord.charAt(nconsonants-1).toLowerCase() === 'q') && (englishWord.charAt(nconsonants).toLowerCase() === 'u')) {
+            nconsonants += 1
+          }
         return englishWord.slice(nconsonants) + englishWord.slice(0,nconsonants) + 'ay';
       };
   } else {
@@ -24,7 +27,7 @@ var eWord = function (englishWord) {
 var phrase = function (englishPhrase) {
   var finalPhrase = ''
   var arrayOfWords = englishPhrase.split(' ');
-    for (var index = 0; index <arrayOfWords.length; index +=1){
+    for (var index = 0; index < arrayOfWords.length; index +=1){
 
     finalPhrase = finalPhrase + eWord(arrayOfWords[index]) + ' ';
   }
@@ -35,8 +38,8 @@ var phrase = function (englishPhrase) {
 $(document).ready(function() {
   $("form#pigLatin").submit(function(event) {
     event.preventDefault();
-    var inputPhrase = $("input#startPhrase").val();
-    var result = phrase(inputPhrase);
+    var englishPhrase = $("input#startPhrase").val();
+    var result = phrase(englishPhrase);
 
     $("#result").show();
   });
